@@ -5,13 +5,14 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
-		<servlet-name>Blog_Engine_HW1</servlet-name>
+		<servlet-name>submit</servlet-name>
 		<servlet-class>blog_engine.Blog_Engine_HW1Servlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Blog_Engine_HW1</servlet-name>
-		<url-pattern>/blog_engine_hw1</url-pattern>
-	</servlet-mapping>
+        <servlet-name>submit</servlet-name>
+        <url-pattern>/submit</url-pattern>
+    </servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>Home.jsp</welcome-file>
 	</welcome-file-list>

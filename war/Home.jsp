@@ -63,9 +63,6 @@
           </ul>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="blog_engine_hw1">Add Post</a></li>
-      </ul>
     </div>
   </div>
 </nav>

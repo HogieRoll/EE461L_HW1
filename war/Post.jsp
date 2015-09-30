@@ -39,7 +39,7 @@
        	  <span class="icon-bar"></span>
        	  <span class="icon-bar"></span>
       	</button>
-      	<a class="navbar-brand" href="#">HogieRoll</a>
+      	<a class="navbar-brand" href="../Home.jsp">HogieRoll</a>
     	</div>
 
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -63,80 +63,29 @@
           </ul>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="blog_engine_hw1">Add Post</a></li>
-      </ul>
     </div>
   </div>
 </nav>
-<form class="form-horizontal">
+<form class="form-horizontal" action="/submit" method="get">
   <fieldset>
     <legend>Legend</legend>
     <div class="form-group">
-      <label class="col-lg-2 control-label" for="inputEmail">Email</label>
+      <label class="col-lg-2 control-label" for="postTitle">Title</label>
       <div class="col-lg-10">
-        <input class="form-control" id="inputEmail" type="text" placeholder="Email">
+        <input class="form-control" id="postTitle" name="postTitle" type="text" placeholder="Title">
       </div>
-    </div>
+    </div>   
     <div class="form-group">
-      <label class="col-lg-2 control-label" for="inputPassword">Password</label>
+      <label class="col-lg-2 control-label" for="postText">Textarea</label>
       <div class="col-lg-10">
-        <input class="form-control" id="inputPassword" type="password" placeholder="Password">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> Checkbox
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-lg-2 control-label" for="textArea">Textarea</label>
-      <div class="col-lg-10">
-        <textarea class="form-control" id="textArea" rows="3"></textarea>
+        <textarea class="form-control" name="postContent" id="postText" rows="8"></textarea>
         <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-lg-2 control-label">Radios</label>
-      <div class="col-lg-10">
-        <div class="radio">
-          <label>
-            <input name="optionsRadios" id="optionsRadios1" type="radio" checked="" value="option1">
-            Option one is this
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input name="optionsRadios" id="optionsRadios2" type="radio" value="option2">
-            Option two can be something else
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-lg-2 control-label" for="select">Selects</label>
-      <div class="col-lg-10">
-        <select class="form-control" id="select">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-        <br>
-        <select class="form-control" multiple="">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
       </div>
     </div>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <button class="btn btn-default" type="reset">Cancel</button>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" input type="submit">Submit</button>
       </div>
     </div>
   </fieldset>

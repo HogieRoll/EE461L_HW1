@@ -68,7 +68,7 @@
 </nav>
 <form class="form-horizontal" action="/submit" method="get">
   <fieldset>
-    <legend>Legend</legend>
+    <legend>Write Post</legend>
     <div class="form-group">
       <label class="col-lg-2 control-label" for="postTitle">Title</label>
       <div class="col-lg-10">
@@ -79,7 +79,7 @@
       <label class="col-lg-2 control-label" for="postText">Textarea</label>
       <div class="col-lg-10">
         <textarea class="form-control" name="postContent" id="postText" rows="8"></textarea>
-        <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+        <span class="help-block">All posts require a title.</span>
       </div>
     </div>
     <div class="form-group">

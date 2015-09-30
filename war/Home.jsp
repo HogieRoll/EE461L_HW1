@@ -3,6 +3,13 @@
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.datastore.DatastoreService" %>
+<%@ page import="com.google.appengine.api.datastore.Query" %>
+<%@ page import="com.google.appengine.api.datastore.Entity" %>
+<%@ page import="com.google.appengine.api.datastore.FetchOptions" %>
+<%@ page import="com.google.appengine.api.datastore.Key" %>
+<%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
@@ -30,41 +37,39 @@
 	    }
 	%>
 	</div>
-  	<nav class="navbar navbar-default">
+<nav class="navbar navbar-default">
   	<div class="container-fluid">
     	<div class="navbar-header">
-     	 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      	  <span class="sr-only">Toggle navigation</span>
-       	  <span class="icon-bar"></span>
-       	  <span class="icon-bar"></span>
-       	  <span class="icon-bar"></span>
-      	</button>
-      	<a class="navbar-brand" href="#">HogieRoll</a>
+    	<a class="navbar-brand" href="../Home.jsp">HogieRoll</a>
+    	<ul class="nav navbar-nav">
+        <%if(user!=null){%>
+        <li><a href="../Post.jsp">Write Post</a></li>
+        <%}else{%>
+        <li><a href="#"><font color: "FFFF00">Write Post</font></a></li>
+        <%}%>
+      	</ul>
     	</div>
-
-    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      	  <ul class="nav navbar-nav">
-        	<li><a href="#">About <span class="sr-only">(current)</span></a></li>
-        	<%if(user!=null){%>
-        	<li><a href="../Post.jsp">Write Post</a></li>
-        	<%}else{%>
-        	<li><a href="#"><font color: "FFFF00">Write Post</font></a></li>
-        	<%}%>
-        	<li class="dropdown">
-          <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">All</a></li>
-            <li><a href="#">Most Popular</a></li>
-            <li><a href="#">Least Popular</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
   </div>
 </nav>
-  </body>
+<legend>Posts</legend>
+<%
+DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+Key postKey = KeyFactory.createKey("Postbook", "Wall");
+// Run an ancestor query to ensure we see the most up-to-date
+// view of the Greetings belonging to the selected Guestbook.
+Query query = new Query("Post", postKey).addSort("Author", Query.SortDirection.ASCENDING);
+List<Entity> posts = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
+System.out.println(posts.toString());
+for(Entity Post: posts)
+{
+  pageContext.setAttribute("Post_Content",Post.getProperty("Content"));
+  pageContext.setAttribute("Post_Title", Post.getProperty("Title"));
+  pageContext.setAttribute("Post_Author", Post.getProperty("Author"));
+  %>
+  <h1>${fn:escapeXml(Post_Title)}<span><font size= "4">   -${fn:escapeXml(Post_Author)}</font></span></h1>
+  <blockquote>${fn:escapeXml(Post_Content)}</blockquote>
+  <%
+}
+%>
+</body>
 </html>

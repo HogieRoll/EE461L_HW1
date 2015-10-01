@@ -26,36 +26,43 @@ public class Blog_Engine_HW1Servlet extends HttpServlet
 		String pT=req.getParameter("postTitle");
 		String pC=req.getParameter("postContent");
 		
-		resp.getWriter().println(pT);
-		resp.getWriter().println(pC);
+		System.out.println("Length"+pT.length());
+		System.out.println("Length"+pC.length());
 		if(pT.length()==0||pC.length()==0)
 		{
 			resp.sendRedirect("../Post.jsp");
 		}
-		UserService userService = UserServiceFactory.getUserService();
-	    User user = userService.getCurrentUser();
-		if(user==null)
+		else
 		{
-			resp.sendRedirect("../Home.jsp");
-		}
-		// 1) create a java calendar instance
-		Calendar calendar = Calendar.getInstance();
-		 
-		// 2) get a java.util.Date from the calendar instance.
-//		    this date will represent the current instant, or "now".
-		java.util.Date now = calendar.getTime();
-		
-	    resp.getWriter().println(user.getEmail()+" "+now.toString());
-	    Key postKey = KeyFactory.createKey("Postbook", "Wall");
-	    Entity Post=new Entity("Post",postKey);
-	    Post.setProperty("Title", pT);
-	    Post.setProperty("Content", pC);
-	    Post.setProperty("Date", now);
-	    Post.setProperty("Author", user.getEmail());
-	    
-	    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			System.out.println("Not Empty");
+			UserService userService = UserServiceFactory.getUserService();
+		    User user = userService.getCurrentUser();
+			if(user==null)
+			{
+				resp.sendRedirect("../Post.jsp");
+			}
+			else
+			{
+				// 1) create a java calendar instance
+				Calendar calendar = Calendar.getInstance();
+				 
+				// 2) get a java.util.Date from the calendar instance.
+//				    this date will represent the current instant, or "now".
+				java.util.Date now = calendar.getTime();
+				
+			    resp.getWriter().println(user.getEmail()+" "+now.toString());
+			    Key postKey = KeyFactory.createKey("Postbook", "Wall");
+			    Entity Post=new Entity("Post",postKey);
+			    Post.setProperty("Title", pT);
+			    Post.setProperty("Content", pC);
+			    Post.setProperty("Date", now.getTime());
+			    Post.setProperty("Author", user.getEmail());
+			    
+			    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-        datastore.put(Post);
-        resp.sendRedirect("../Home.jsp");
+		        datastore.put(Post);
+		        resp.sendRedirect("../Home.jsp");
+			}
+		}
 	}
 }

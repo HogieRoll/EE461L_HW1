@@ -51,28 +51,21 @@
     	</div>
   </div>
 </nav>
-<div class="jumbotron">
-  <div align="left">
-  <h1>HogieRoll Blog Engine</h1>
-  <p>An efficient platform for unfiltered thoughts.  The best kind.</p>
-  </div>
-  <span><img src="images/Family-of-Hoagies.jpg" alt="Hoagie Roll" style="width:820px;height:452px;"></span>
-</div>
-<legend><font size="10">Recent Posts</font><span><a href="../Archive.jsp">View Archived Posts</a></span></legend>
+<legend><font size="10">Archived Posts</font></legend>
 <%
 DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 Key postKey = KeyFactory.createKey("Postbook", "Wall");
 // Run an ancestor query to ensure we see the most up-to-date
 // view of the Greetings belonging to the selected Guestbook.
 Query query = new Query("Post", postKey).addSort("Date", Query.SortDirection.DESCENDING);
-List<Entity> posts = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
+List<Entity> posts = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(1000));
 if(posts.size()==0)
 {
 %><p1>There are no posts to show</p1><%
 }
 System.out.println(posts.toString());
 int i=0;
-while(i<5&&i<posts.size())
+while(i<posts.size())
 {
   Entity Post=posts.get(i);i++;
   pageContext.setAttribute("Post_Content",Post.getProperty("Content"));

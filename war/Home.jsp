@@ -26,12 +26,12 @@
       pageContext.setAttribute("user", user);
 	%>
 	<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
-	<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>"><font color="FFFFFF">sign out</font></a>.)</p>
+	<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>"><font color="blue">sign out</font></a>.)</p>
 	<%
     } else {
 	%>
 	<p>Hello!
-	<a href="<%= userService.createLoginURL(request.getRequestURI()) %>"><font color="FFFFFF">
+	<a href="<%= userService.createLoginURL(request.getRequestURI()) %>"><font color="blue">
 	Sign in</font></a> to make posts or subscribe.</p>
 	<%
 	    }
@@ -47,6 +47,8 @@
         <%}else{%>
         <li><a href="#"><font color: "FFFF00">Write Post</font></a></li>
         <%}%>
+        <li align="right"><a href="/subscribe">Subscribe</a></li>
+        <li align="right"><a href="/unsubscribe">UnSubscribe</a></li>
       	</ul>
     	</div>
   </div>
@@ -78,6 +80,7 @@ while(i<5&&i<posts.size())
   pageContext.setAttribute("Post_Content",Post.getProperty("Content"));
   pageContext.setAttribute("Post_Title", Post.getProperty("Title"));
   pageContext.setAttribute("Post_Author", Post.getProperty("Author"));
+  pageContext.setAttribute("Post_DateReadable", Post.getProperty("DateReadable"));
   %>
   	<br><div class="panel panel-default">
   	<div class="panel-heading">
@@ -85,6 +88,7 @@ while(i<5&&i<posts.size())
   	</div>
   	<div class="panel-body">
     	<blockquote>${fn:escapeXml(Post_Content)}</blockquote>
+    	<p>${fn:escapeXml(Post_DateReadable)}</p>
   		</div>
 	</div></br>
   <%

@@ -26,12 +26,12 @@
       pageContext.setAttribute("user", user);
 	%>
 	<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
-	<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>"><font color="FFFFFF">sign out</font></a>.)</p>
+	<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>"><font color="blue">sign out</font></a>.)</p>
 	<%
     } else {
 	%>
 	<p>Hello!
-	<a href="<%= userService.createLoginURL(request.getRequestURI()) %>"><font color="FFFFFF">
+	<a href="<%= userService.createLoginURL(request.getRequestURI()) %>"><font color="blue">
 	Sign in</font></a> to make posts or subscribe.</p>
 	<%
 	    }

@@ -44,15 +44,29 @@
     	<ul class="nav navbar-nav">
         <%if(user!=null){%>
         <li><a href="../Post.jsp">Write Post</a></li>
-        <%}else{%>
-        <li><a href="#"><font color: "FFFF00">Write Post</font></a></li>
-        <%}%>
-        <li align="right"><a href="/subscribe">Subscribe</a></li>
-        <li align="right"><a href="/unsubscribe">UnSubscribe</a></li>
-      	</ul>
+        <%
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		Query query =new Query("Subscription");
+		int flag=0;
+		List<Entity> Subscriptions = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
+        for(Entity Sub: Subscriptions)
+        {
+        	if(Sub.getProperty("UserEmail").equals(user.getEmail()))
+        	{%><li align="right"><a href="/unsubscribe">UnSubscribe</a></li><%flag=1;}
+        }
+        if(flag==0)
+        {%><li align="right"><a href="/subscribe">Subscribe</a></li><%}
+        }
+        %>
+        </ul>
     	</div>
   </div>
 </nav>
+		<%if(user==null){%>
+        <div class="alert alert-dismissible alert-danger">
+  		<button class="close" type="button" data-dismiss="alert">×</button>
+  		<strong>Oh snap!</strong> <a class="alert-link" href="#">You need to login</a> to make posts and subscribe.
+		</div><%}%>
 <div class="jumbotron">
   <div align="left">
   <h1>HogieRoll Blog Engine</h1>

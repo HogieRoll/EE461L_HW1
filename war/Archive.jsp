@@ -71,6 +71,7 @@ while(i<posts.size())
   pageContext.setAttribute("Post_Content",Post.getProperty("Content"));
   pageContext.setAttribute("Post_Title", Post.getProperty("Title"));
   pageContext.setAttribute("Post_Author", Post.getProperty("Author"));
+  pageContext.setAttribute("Post_Time", Post.getProperty("DateReadable"));
   %>
   	<br><div class="panel panel-default">
   	<div class="panel-heading">
@@ -78,6 +79,7 @@ while(i<posts.size())
   	</div>
   	<div class="panel-body">
     	<blockquote>${fn:escapeXml(Post_Content)}</blockquote>
+    	<p>${fn:escapeXml(Post_Time)}</p>
   		</div>
 	</div></br>
   <%

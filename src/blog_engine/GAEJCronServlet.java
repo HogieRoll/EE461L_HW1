@@ -60,7 +60,7 @@ Key postKey = KeyFactory.createKey("Postbook", "Wall");
 Query postquery = new Query("Post", postKey).addSort("Date", Query.SortDirection.DESCENDING);
 List<Entity> posts = datastore.prepare(postquery).asList(FetchOptions.Builder.withLimit(10));
 String msgBody = "Digest\n";int i=0;
-
+boolean flag=false;
 while(i<posts.size())
 {
 	Entity Post=posts.get(i);i++;
@@ -72,11 +72,13 @@ while(i<posts.size())
 		msgBody+=Post.getProperty("Content")+"\n";
 		msgBody+=Post.getProperty("Author")+"\n";
 		msgBody+=Post.getProperty("DateReadable")+"\n\n";
+		flag=true;
 	}
-	
-	
 }
-
+if(flag==false)
+{
+	return;
+}
 Key subKey = KeyFactory.createKey("SubList", "SubInfo");
 Query query = new Query("Subscription", subKey).addSort("UserEmail", Query.SortDirection.ASCENDING);
 List<Entity> Subscriptions = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
@@ -85,7 +87,7 @@ try {
 	for(Entity Sub: Subscriptions)
 	{
 		 Message msg = new MimeMessage(session);
-		 msg.setFrom(new InternetAddress("alexh.458@gmail.com", "Example.com Admin"));
+		 msg.setFrom(new InternetAddress("alexh.458@gmail.com", "HogieRoll Admin"));
 		 msg.addRecipient(Message.RecipientType.TO,new InternetAddress(Sub.getProperty("UserEmail").toString(), "Mr. User"));
 		 msg.setSubject("Daily HogieRoll Update");
 		 msg.setText(msgBody);

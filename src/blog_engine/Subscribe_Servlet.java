@@ -29,12 +29,12 @@ public class Subscribe_Servlet extends HttpServlet
 			}
 			else
 			{				
-			    Key postKey = KeyFactory.createKey("SubList", "SubInfo");
-			    Entity Subscription=new Entity("Subscription",postKey);
+			    Key subKey = KeyFactory.createKey("SubList", "SubInfo");
+			    Entity Subscription=new Entity("Subscription",subKey);
 			    Subscription.setProperty("UserEmail", user.getEmail());
 			    
 			    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-			    Query query = new Query("Subscription", postKey).addSort("UserEmail", Query.SortDirection.ASCENDING);
+			    Query query = new Query("Subscription", subKey).addSort("UserEmail", Query.SortDirection.ASCENDING);
 			    List<Entity> Subscriptions = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
 			    for(Entity Sub: Subscriptions)
 			    {

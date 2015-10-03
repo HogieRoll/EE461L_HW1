@@ -1,11 +1,6 @@
-<!-- Indices written at Fri, 2 Oct 2015 19:41:25 CDT -->
+<!-- Indices written at Fri, 2 Oct 2015 22:19:29 CDT -->
 
 <datastore-indexes>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Subscription" ancestor="true" source="auto">
-        <property name="UserEmail" direction="asc"/>
-    </datastore-index>
 
     <!-- Used 1 time in query history -->
     <datastore-index kind="Post" ancestor="true" source="auto">
